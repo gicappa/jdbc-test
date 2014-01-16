@@ -4,6 +4,7 @@ import java.sql.DriverManager;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import static java.lang.System.exit;
 import static java.lang.System.out;
 
 /**
@@ -34,10 +35,15 @@ public class JT {
     }
 
     public static void main(String[] argv) {
-        String url = argv[1];
-        String driver = argv[2];
-        String username = argv[3];
-        String password = argv[4];
+        if (argv.length != 4) {
+            out.print("usage: java -cp ./driver-1.2-34.jdbc4.jar:. gicappa/JT \"jdbc:driver://localhost:1234/driver\" \"org.driver.Driver\" \"user\" \"pass\"");
+            exit(1);
+        }
+
+        String url = argv[0];
+        String driver = argv[1];
+        String username = argv[2];
+        String password = argv[3];
 
         new JT(url, driver, username, password);
     }
